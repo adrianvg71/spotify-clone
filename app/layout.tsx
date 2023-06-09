@@ -25,7 +25,9 @@ export default async function RootLayout({
   const userSongs = await getSongsByUserId();
   return (
     <html lang="en">
-      <link rel="icon" href="/public/Spotify_icon.svg" />
+      <head>
+        <link rel="icon" href="./favicon.ico" />
+      </head>
       <body className={font.className}>
         <ToasterProvider />
         <SupabaseProvider>
