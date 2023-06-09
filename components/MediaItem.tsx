@@ -5,17 +5,21 @@ import { Song } from "@/types";
 import Image from "next/image";
 import LikeButton from "./LikeButton";
 import { twMerge } from "tailwind-merge";
+import { BsPlay } from "react-icons/bs"
+import useOnPlay from "@/hooks/useOnPlay";
 
 interface MediaItemProps {
   data: Song,
   onClick?: (id: string) => void;
-  className?: string; 
+  className?: string;
+  like?: boolean; 
 }
 
 const MediaItem: React.FC<MediaItemProps> = ({
   data,
   onClick,
-  className
+  className,
+  like=true
 }) => {
   const imageUrl = useLoadImage(data);
 
@@ -50,7 +54,13 @@ const MediaItem: React.FC<MediaItemProps> = ({
         </p>
         </div>
       </div>
-      <LikeButton songId={data.id} /> 
+      {like ? (
+        <LikeButton songId={data.id} /> 
+      ) : (        
+        <button onClick={handleClick}>
+          <BsPlay size={30} className="text-neutral-400 hover:text-white transition"/>
+        </button>
+      )}
     </div>
    );
 }
