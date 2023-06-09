@@ -11,6 +11,8 @@ import { Song } from "@/types";
 import { AiFillHeart } from "react-icons/ai";
 import usePlayer from "@/hooks/usePlayer";
 import { twMerge } from "tailwind-merge";
+import { useUser } from "@/hooks/useUser";
+import useAuthModal from "@/hooks/useAuthModal";
 
 interface SidebarProps {
   children: React.ReactNode,
@@ -22,27 +24,37 @@ const Sidebar: React.FC<SidebarProps> = ({
   songs
 }) => {
   const pathname = usePathname()
+  const {user} = useUser();
+  const authModal = useAuthModal();
 
-  const routes = useMemo(() => [
-    {
-      icon: HiHome,
-      label: 'Home',
-      active: pathname === '/',
-      href: '/',
-    },
-    {
-      icon: BiSearch,
-      label: 'Search',
-      active: pathname === '/search',
-      href: '/search',
-    },
-    {
-      icon: AiFillHeart,
-      label: 'Favoritas',
-      active: pathname === '/liked',
-      href: '/liked',
-    }
-  ], [pathname])
+
+  const routes = useMemo(() =>{
+    const baseRoutes = [
+      {
+        icon: HiHome,
+        label: 'Home',
+        active: pathname === '/',
+        href: '/',
+      },
+      {
+        icon: BiSearch,
+        label: 'Search',
+        active: pathname === '/search',
+        href: '/search',
+      },
+    ];
+  
+    const loggedInRoutes = [
+      {
+        icon: AiFillHeart,
+        label: 'Favoritas',
+        active: pathname === '/liked',
+        href: '/liked',
+      },
+    ];
+  
+    return user?.id ? [...baseRoutes, ...loggedInRoutes] : baseRoutes;
+  }, [user?.id, pathname]);
 
   const player = usePlayer();
 

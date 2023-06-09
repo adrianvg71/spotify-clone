@@ -1,6 +1,7 @@
 "use client"
 
 import MediaItem from "@/components/MediaItem";
+import useAuthModal from "@/hooks/useAuthModal";
 import { useUser } from "@/hooks/useUser";
 import { Song } from "@/types";
 import { useRouter } from "next/navigation";

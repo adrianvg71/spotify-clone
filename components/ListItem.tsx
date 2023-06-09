@@ -1,5 +1,7 @@
 "use client"
 
+import useAuthModal from "@/hooks/useAuthModal";
+import { useUser } from "@/hooks/useUser";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FaPlay } from "react-icons/fa"
@@ -17,9 +19,13 @@ const ListItem: React.FC<ListItemProps> = ({
 }) => {
 
   const router = useRouter();
+  const {user} = useUser();
+  const authModal = useAuthModal();
 
   const onClick = () => {
-    // add authentication before push
+    if(!user?.id) {
+      return authModal.onOpen();
+    }
     router.push(href)
   }
 
