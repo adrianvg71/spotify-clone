@@ -25,9 +25,7 @@ export default async function RootLayout({
   const userSongs = await getSongsByUserId();
   return (
     <html lang="en">
-      <head>
-        <link rel="icon" href="./favicon.ico" />
-      </head>
+      <link rel="icon" href="./favicon.ico" sizes='any'/>
       <body className={font.className}>
         <ToasterProvider />
         <SupabaseProvider>
