@@ -78,6 +78,11 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
   }
 
   const toggleMute = () => {
+    if (volume === 0 && previousVolume === 0) {
+      setVolume(0.75);
+      return;
+    }
+
     if (volume === 0) {
       setVolume(previousVolume);
     } else {
@@ -85,6 +90,8 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
       setVolume(0);
     }
   };
+
+
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 h-full">
