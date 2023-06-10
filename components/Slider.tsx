@@ -8,7 +8,7 @@ interface SliderProps {
 }
 
 const Slider: React.FC<SliderProps> = ({
-  value = 1,
+  value,
   onChange
 }) => {
   const handleChange = (newValue: number[]) => {
@@ -19,7 +19,7 @@ const Slider: React.FC<SliderProps> = ({
     <RadixSlider.Root
     className="relative flex items-center select-none cursor-pointer touch-none w-full h-10 group"
     defaultValue={[1]}
-    value={[value]}
+    value={[value!]}
     onValueChange={handleChange}
     max={1}
     step={0.01}

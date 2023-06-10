@@ -7,9 +7,10 @@ import { AiFillStepBackward, AiFillStepForward } from "react-icons/ai";
 import { HiSpeakerWave, HiSpeakerXMark } from "react-icons/hi2"
 import Slider from "./Slider";
 import usePlayer from "@/hooks/usePlayer";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import clsx from "clsx";
 import useSound from "use-sound";
+import { useGlobalState } from "@/app/libs/globalVolume";
 
 interface PlayerContentProps {
   song: Song;
@@ -18,12 +19,13 @@ interface PlayerContentProps {
 
 const PlayerContent: React.FC<PlayerContentProps> = ({
   song,
-  songUrl
+  songUrl,
 }) => {
   const player = usePlayer();
 
-  const [volume, setVolume] = useState(1);
   const [isPlaying, setIsPlaying] = useState(true);
+  const { volume, setVolume } = useGlobalState();
+  const [previousVolume, setPreviousVolume] = useState(0);
 
   const Icon = isPlaying ? BsPauseFill : BsPlayFill
 
@@ -77,11 +79,12 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
 
   const toggleMute = () => {
     if (volume === 0) {
-      setVolume(1);
+      setVolume(previousVolume);
     } else {
+      setPreviousVolume(volume);
       setVolume(0);
     }
-  }
+  };
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 h-full">
@@ -116,3 +119,4 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
 }
 
 export default PlayerContent
+
