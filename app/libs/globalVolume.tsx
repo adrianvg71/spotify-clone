@@ -5,6 +5,8 @@ import React, { createContext, useContext, useState } from 'react';
 interface GlobalStateContextProps {
   volume: number;
   setVolume: React.Dispatch<React.SetStateAction<number>>;
+  previousVolume: number;
+  setPreviousVolume: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const GlobalStateContext = createContext<GlobalStateContextProps | undefined>(undefined);
@@ -17,9 +19,10 @@ const GlobalStateProvider: React.FC<GlobalStateProviderProps> = ({
   children
 }) => {
   const [volume, setVolume] = useState(1);
+  const [previousVolume, setPreviousVolume] = useState(0);
 
   return (
-    <GlobalStateContext.Provider value={{ volume, setVolume }}>
+    <GlobalStateContext.Provider value={{ volume, setVolume, previousVolume, setPreviousVolume }}>
       {children}
     </GlobalStateContext.Provider>
   );

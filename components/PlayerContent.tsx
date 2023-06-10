@@ -25,7 +25,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
 
   const [isPlaying, setIsPlaying] = useState(true);
   const { volume, setVolume } = useGlobalState();
-  const [previousVolume, setPreviousVolume] = useState(0);
+  const { previousVolume, setPreviousVolume } = useGlobalState();
 
   const Icon = isPlaying ? BsPauseFill : BsPlayFill
 
