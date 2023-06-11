@@ -23,7 +23,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
 }) => {
   const player = usePlayer();
 
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const { volume, setVolume } = useGlobalState();
   const { previousVolume, setPreviousVolume } = useGlobalState();
 
