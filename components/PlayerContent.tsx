@@ -35,8 +35,8 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
     if (player.ids.length===0) {
       return;
     }
-    
-    const currentIndex = player.ids.findIndex((id) => id === player.activeId);
+ 
+    const currentIndex = player.ids.indexOf(JSON.parse(player.activeId!))
     const nextSong = player.ids[currentIndex+1]
 
     if(!nextSong) {

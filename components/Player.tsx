@@ -14,15 +14,17 @@ const Player = () => {
   useEffect(() => {
     if (song && player.activeId) {
       localStorage.setItem("lastPlayedSong", player.activeId);
+      localStorage.setItem("lastPlaylist", JSON.stringify(player.ids));
     }
   }, [song, player.activeId]);
 
   useEffect(() => {
     const lastPlayedSong = localStorage.getItem("lastPlayedSong");
+    const lastPlaylist = localStorage.getItem("lastPlaylist");
 
     if (lastPlayedSong) {
       player.setId(lastPlayedSong);
-      player.setIds([lastPlayedSong]);
+      player.setIds(JSON.parse(lastPlaylist!));
     }
   }, []);
 
