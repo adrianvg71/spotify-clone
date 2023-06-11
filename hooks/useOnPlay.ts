@@ -12,7 +12,7 @@ const useOnPlay = (songs: Song[]) => {
     // if(!user) {
     //   return authModal.onOpen();
     // }
-
+    
     player.setId(id);
     player.setIds(songs.map((song) => song.id));
   }
