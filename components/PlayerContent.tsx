@@ -118,7 +118,8 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
       <div className="hidden md:flex w-full justify-end pr-2">
         <div className="flex items-center gap-x-2 w-[120px]">
           <VolumeIcon onClick={toggleMute} size={25} className={clsx("cursor-pointer text-neutral-300/50 hover:text-white transition", volume === 0 && "text-white")}/>
-          <Slider value={volume} onChange={(value) => setVolume(value)}/>
+          <Slider value={volume} onChange={(value) => {setVolume(value)
+          window.localStorage.setItem("volume", JSON.stringify(volume))}}/>
         </div>
       </div>
     </div>

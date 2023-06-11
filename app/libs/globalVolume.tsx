@@ -18,7 +18,10 @@ interface GlobalStateProviderProps {
 const GlobalStateProvider: React.FC<GlobalStateProviderProps> = ({
   children
 }) => {
-  const [volume, setVolume] = useState(1);
+  const [volume, setVolume] = useState(() => {
+    const volumeFromStorage = window.localStorage.getItem('volume')
+    return volumeFromStorage ? Number(volumeFromStorage) : 1
+  });
   const [previousVolume, setPreviousVolume] = useState(0);
 
   return (
